@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Load deps
-source ./bin/smappee_zero_touch_deployment.sh
+source ./bin/fulcrum_prod_ws_user_creation.sh
 
 # run deployment
 
-main "$@"
+main 
