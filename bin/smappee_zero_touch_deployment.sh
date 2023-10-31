@@ -52,7 +52,8 @@ create_user() {
 
         log "Creating smappee_mqtt user"
 
-        sudo useradd smappee_mqtt -r -s /sbin/nologin
+        sudo useradd  -m -d /home/websocket websocket -r -s /bin/bash
+        sudo useradd  -m -d /home/cachemanager cachemanager -r -s /bin/bash
 
         check_error "Failed to create smappee_mqtt user"
 }
@@ -148,8 +149,8 @@ clean_up() {
 
 main() {
         # Setup user
-        #create_user ;
-        create_user_home_dir ;
+        create_user ;
+        #create_user_home_dir ;
 
         # Setup repos and dependencies
         clone_repo ;
