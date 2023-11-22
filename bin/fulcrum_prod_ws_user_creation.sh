@@ -52,15 +52,31 @@ create_user() {
 
         log "Creating smappee_mqtt user"
 
-        sudo useradd  -m -d /var/websocket websocket -r -s /bin/bash
-        sudo useradd  -m -d /var/cachemanager cachemanager -r -s /bin/bash
+        useradd  -m -d /var/websocket websocket -r -s /bin/bash
+        useradd  -m -d /var/cachemanager cachemanager -r -s /bin/bash
 
         check_error "Failed to create smappee_mqtt user"
 }
 
+
+
+add_user_to_sudo() {
+        # Add the smappee_mqtt users to the sudoer group
+
+        log "Creating smappee_mqtt user"
+
+        useradd  -aG websocket
+        useradd  -aG cachemanager
+
+        check_error "Failed to add smappee_mqtt user to sudoers group"
+}
+
+
+
 main() {
         # Setup user
         create_user ;
+        add_user_to_sudo;
 }
 
 main
