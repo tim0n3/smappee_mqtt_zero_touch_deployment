@@ -2,7 +2,7 @@
 
 
 
-# Function to log messages to stderr and a log file
+# Function to stderr in the terminal and log messages to a log file
 
 log() {
 
@@ -52,8 +52,7 @@ create_user() {
 
         log "Creating smappee_mqtt user"
 
-        useradd  -m -d /var/websocket websocket -r -s /bin/bash
-        useradd  -m -d /var/cachemanager cachemanager -r -s /bin/bash
+        useradd  -m -d /var/smappee smappee_mqtt -r -s /bin/bash
 
         check_error "Failed to create smappee_mqtt user"
 }
@@ -65,8 +64,7 @@ add_user_to_sudo() {
 
         log "Creating smappee_mqtt user"
 
-        useradd  -aG websocket
-        useradd  -aG cachemanager
+        useradd  -aG sudo smappee_mqtt
 
         check_error "Failed to add smappee_mqtt user to sudoers group"
 }
