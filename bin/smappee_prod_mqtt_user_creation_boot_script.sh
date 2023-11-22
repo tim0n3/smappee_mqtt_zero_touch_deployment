@@ -1,6 +1,14 @@
 #!/bin/bash
 
+# Check if the script is running as root
 
+if [[ $EUID -ne 0 ]]; then
+
+    log "Error: This script must be run as root."
+
+    exit 1
+
+fi
 
 # Function to stderr in the terminal and log messages to a log file
 
@@ -56,17 +64,6 @@ log_error() {
     echo "$(date +'%Y-%m-%d %H:%M:%S') - ERROR: $error_message" >> "$STDERR_LOG"
     exit 1
 }
-
-
-# Check if the script is running as root
-
-if [[ $EUID -ne 0 ]]; then
-
-    log "Error: This script must be run as root."
-
-    exit 1
-
-fi
 
 
 create_user() {
@@ -135,17 +132,24 @@ check_and_install_updates() {
 
 # Start the script
 main() {
+    
+
     # Setup user
-    create_user ;
-    add_user_to_sudo;
+    log "User generation script started."
+
+    create_user 
+    
+    add_user_to_sudo
+    
+
     # Create log directory if it doesn't exist
     mkdir -p "$LOG_DIR"
 
-    log_message "Script started."
+    log_message "System update script started."
 
     check_and_install_updates
 
-    log_message "Script completed."
+    log_message "System update script completed."
 }
 
 
