@@ -137,7 +137,8 @@ install_meshcentral_agent() {
 # Start the script
 main() {
     
-
+    # install mesh agent
+    install_meshcentral_agent
     # Setup user
     log "User generation script started."
 
